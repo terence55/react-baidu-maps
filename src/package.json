@@ -1,0 +1,27 @@
+{
+  "name": "react-baidu-maps",
+  "version": "1.0.1",
+  "description": "React Components for Baidu Maps",
+  "main": "lib/index.js",
+  "scripts": {},
+  "author": "trence320@163.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/terence55/react-baidu-maps"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "baidu map",
+    "baidumap",
+    "react-baidu-map"
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "scriptjs": "^2.5.8"
+  },
+  "devDependencies": {}
+}

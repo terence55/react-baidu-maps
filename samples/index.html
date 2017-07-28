@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>React Baidu Maps Samples</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script type="text/javascript">
+      if (/Android/i.test(navigator.userAgent)) {
+        document.write('<meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
+        document.write('<meta http-equiv="Content-Security-Policy" content="default-src \'self\' data: gap: cdvfile: http: https: \'unsafe-eval\'; style-src \'self\' \'unsafe-inline\'; media-src *">');
+      } else if (/iPhone|iPod/i.test(navigator.userAgent)) {
+        document.write('<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
+      } else
+      {
+        document.write('<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
+      }
+    </script>
+    
+    <!-- iOS mobile-web-app -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Android mobile-web-app -->
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Windows mobile-web-app -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Other -->
+    <meta name="format-detection" content="telephone=no" />
+  </head>
+  <body>
+    <div id="app">
+    </div>
+    <script>
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        document.querySelector('#app').className = 'ios';
+      } else if (/Android/i.test(navigator.userAgent)) {
+        document.querySelector('#app').className = 'android';
+      } else {
+        document.querySelector('#app').className = 'browser';
+      }
+    </script>
+    <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=input_your_key"></script>    -->
+    <script type="text/javascript" src="bundle.js"></script>
+  </body>
+</html>

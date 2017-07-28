@@ -1,0 +1,41 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "globals": {
+    "window": true,
+    "document": true,
+    "navigator": true,
+    "location": true
+  },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "rules": {
+    "no-undef": ["error"], // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": ["off"],
+    "func-names": ["off"],
+    "no-console": ["error", { "allow": ["warn", "error"] }], 
+    "jsx-a11y/no-static-element-interactions": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/prefer-stateless-function": ["off"],
+    "react/no-unused-prop-types": ["off"],
+    "react/prefer-es6-class": ["off"],
+    "react/sort-comp": ["off"],
+    "react/jsx-no-bind": ["off"],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    "react/no-string-refs": ["off"],
+    "react/require-default-props": ["off"],
+    "no-param-reassign": ["off"],
+    "class-methods-use-this": ["off"],
+    "prefer-template": ["off"],
+    "import/prefer-default-export": ["off"],
+    "object-shorthand": ["off"],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-useless-constructor": ["off"],
+    "max-len": ["error", { "code": 200 }]
+  }
+}
