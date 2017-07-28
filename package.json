@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src",
     "pub": "cd dist && npm publish",
-    "build": "NODE_ENV=production rm -r dist && babel src --out-dir dist/lib && cp src/package.json dist/ && cp .npmignore dist/ && cp src/README.md dist/"
+    "build": "NODE_ENV=production rm -r dist && babel src --out-dir dist/lib && cp src/package.json dist/ && cp .npmignore dist/ && cp README.md dist/"
   },
   "author": "trence320@163.com",
   "license": "MIT",
