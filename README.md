@@ -13,22 +13,37 @@ npm install react-baidu-maps --save
     
 ## Usage
 
+### Getting Started
+
+You need to obtain a Baidu Maps AK through [Baidu LBS Platform](http://lbsyun.baidu.com/apiconsole/key).
+
+Then import Baidu Maps script into your `index.html`.
+
+```html
+<html>
+  <head>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=input_your_key"></script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+Use Baidu Maps statically:
+
 ```js
 import { BaiduMap } from 'react-baidu-maps';
-
 ReactDOM.render(
   <div style={{ background: '#444', height: '500px' }}>
     <BaiduMap mapContainer={<div style={{ height: '100%' }} />} />
   </div>, container);
 ```
 
-### Asynchronous Load
+Use Baidu Maps dynamically with asynchronous load:
 
 ```js
 import { asyncWrapper } from 'react-baidu-maps';
-
 const AsyncMap = asyncWrapper(BaiduMap);
-
 ReactDOM.render(
   <div style={{ background: '#444', height: '500px' }}>
     <AsyncMap
@@ -38,13 +53,31 @@ ReactDOM.render(
   </div>, container);
 ```
 
+### Handle Events
+
+All events are mapped to React props with name like 'on + {event name}'(e.g. tilesloaded => onTilesloaded, resize => onResize)，the first letter of event name should be capitalized.
+
+```js
+ReactDOM.render(
+  <div style={{ background: '#444', height: '500px' }}>
+    <BaiduMap
+      mapContainer={<div style={{ height: '100%' }}
+      onTilesloaded={...}
+      onClick={...} />} />
+  </div>, container);
+```
+
+### Overlays
+
+All Baidu Maps overlays are supported.
+
 ### Marker
 
 ```js
 <BaiduMap
-      mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
-      loadingElement={<div>Loading.....</div>}
-      mapContainer={<div style={{ height: '100%' }} />} >
+  mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
+  loadingElement={<div>Loading.....</div>}
+  mapContainer={<div style={{ height: '100%' }} />} >
   <Marker position={{ lng: 116.404, lat: 39.915 }} />
 </BaiduMap>
 ```
@@ -52,7 +85,11 @@ ReactDOM.render(
 ### Circle
 
 ```js
-<Circle center={{ lng: 116.404, lat: 39.915 }} radius={500} strokeColor="red" strokeWeight={2} />
+<Circle
+  center={{ lng: 116.404, lat: 39.915 }}
+  radius={500}
+  strokeColor="red"
+  strokeWeight={2} />
 ```
 
 ### Curve
@@ -164,4 +201,77 @@ for (let i = 0; i < MAX; i++) {
 <MarkerClusterer>
   {markerClusterer.map(position => <Marker position={position} />)}
 </MarkerClusterer> 
+```
+
+### Controls
+
+All Baidu Maps controls are supported.
+
+### NavigationControl
+
+```js
+<BaiduMap
+  mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
+  loadingElement={<div>Loading.....</div>}
+  mapContainer={<div style={{ height: '100%' }} />} >
+  <NavigationControl
+    type="small"
+    anchor="top_right"
+    offset={{ width: 0, height: 30 }} />
+</BaiduMap>
+```
+
+### ScaleControl
+
+```js
+<ScaleControl />
+```
+
+### MapTypeControl
+
+```js
+<MapTypeControl  />
+```
+
+### OverviewMapControl
+
+```js
+<OverviewMapControl  />
+```
+
+### GeolocationControl
+
+```js
+<GeolocationControl
+  onLocationSuccess={(e) => {
+    let address = '';
+    address += e.addressComponent.province;
+    address += e.addressComponent.city;
+    address += e.addressComponent.district;
+    address += e.addressComponent.street;
+    address += e.addressComponent.streetNumber;
+    console.warn(`Current Location: ${address}`);
+  }} />
+```
+
+### CopyrightControl
+
+```js
+<CopyrightControl
+  anchor="bottom_right"
+  copyrights={[
+    {
+      id: 1,
+      content: "<div href='#' style='font-size:20px;background:yellow'>我是自定义版权控件</div>",
+      bounds: {
+        sw: {
+          lng: 116.055026,
+          lat: 39.591042
+        },
+        ne: {
+          lng: 116.752974,
+          lat: 40.237421
+        }
+      }
+    }]} />
 ```

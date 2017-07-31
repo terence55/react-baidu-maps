@@ -27,6 +27,55 @@ export function getMarkerAnimation(animation) {
   return Null; // eslint-disable-line no-undef
 }
 
+export function getNavigationControlType(type) {
+  const MAP = {
+    large: BMAP_NAVIGATION_CONTROL_LARGE, // eslint-disable-line no-undef
+    small: BMAP_NAVIGATION_CONTROL_SMALL, // eslint-disable-line no-undef
+    pan: BMAP_NAVIGATION_CONTROL_PAN, // eslint-disable-line no-undef
+    zoom: BMAP_NAVIGATION_CONTROL_ZOOM // eslint-disable-line no-undef
+  };
+  if (MAP[type]) {
+    return MAP[type];
+  }
+  return undefined;
+}
+
+export function getControlAnchor(anchor) {
+  const MAP = {
+    top_left: BMAP_ANCHOR_TOP_LEFT, // eslint-disable-line no-undef
+    top_right: BMAP_ANCHOR_TOP_RIGHT, // eslint-disable-line no-undef
+    bottom_left: BMAP_ANCHOR_BOTTOM_LEFT, // eslint-disable-line no-undef
+    bottom_right: BMAP_ANCHOR_BOTTOM_RIGHT // eslint-disable-line no-undef
+  };
+  if (MAP[anchor]) {
+    return MAP[anchor];
+  }
+  return undefined;
+}
+
+export function getLengthUnit(unit) {
+  const MAP = {
+    metric: BMAP_UNIT_METRIC, // eslint-disable-line no-undef
+    imperial: BMAP_UNIT_IMPERIAL // eslint-disable-line no-undef
+  };
+  if (MAP[unit]) {
+    return MAP[unit];
+  }
+  return undefined;
+}
+
+export function getMapTypeControlType(type) {
+  const MAP = {
+    horizontal: BMAP_MAPTYPE_CONTROL_HORIZONTAL, // eslint-disable-line no-undef
+    dropdown: BMAP_MAPTYPE_CONTROL_DROPDOWN, // eslint-disable-line no-undef
+    map: BMAP_MAPTYPE_CONTROL_MAP // eslint-disable-line no-undef
+  };
+  if (MAP[type]) {
+    return MAP[type];
+  }
+  return BMAP_MAPTYPE_CONTROL_HORIZONTAL; // eslint-disable-line no-undef
+}
+
 export function toBMapPoint(arg) {
   return new BMap.Point(arg.lng, arg.lat); // eslint-disable-line no-undef
 }

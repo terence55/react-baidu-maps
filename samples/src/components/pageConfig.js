@@ -4,6 +4,7 @@ import OverlayDemo from './OverlayDemo';
 import AsyncDemo from './AsyncDemo';
 import RestrictedDemo from './RestrictedDemo';
 import CustomStyleDemo from './CustomStyleDemo';
+import ControlsDemo from './ControlsDemo';
 
 const config = [
   {
@@ -30,11 +31,16 @@ const config = [
     type: 'customstyle',
     link: '/component/customstyle',
     comp: <CustomStyleDemo />
+  },
+  {
+    type: 'controls',
+    link: '/component/controls',
+    comp: <ControlsDemo />
   }
 ];
 
 const pageMap = {};
-config.forEach(item => (pageMap[item.type] = item.comp));
+config.forEach((item) => { pageMap[item.type] = item.comp; });
 
 export default {
   config: config,
