@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from './utils/wrapClass';
 import { MAP } from './utils/constants';
-import { getMapType, toBMapBounds } from './utils/typeTransform';
+import { getMapType, toBMapBounds, toBMapPoint } from './utils/typeTransform';
 import { Point, Bounds } from './utils/MapPropTypes';
 
 /**
@@ -31,7 +31,7 @@ const controlledPropTypes = {
 };
 
 const controlledPropUpdater = {
-  center(obj, arg) { obj.setCenter(arg); },
+  center(obj, arg) { obj.centerAndZoom(toBMapPoint(arg), obj.getZoom()); },
   zoom(obj, arg) { obj.setZoom(arg); },
   enableDragging(obj, arg) { if (arg) obj.enableDragging(); else obj.disableDragging(); },
   enableScrollWheelZoom(obj, arg) { if (arg) obj.enableScrollWheelZoom(); else obj.disableScrollWheelZoom(); },
@@ -137,6 +137,8 @@ class BaiduMap extends React.Component {
     mapContainer: PropTypes.node.isRequired,
     enableMapClick: PropTypes.bool,
     restrictedBounds: PropTypes.shape(Bounds),
+    defaultCenter: PropTypes.shape(Point),
+    defaultZoom: PropTypes.number,
     onMapInstantiated: PropTypes.func
   };
 
@@ -163,9 +165,11 @@ class BaiduMap extends React.Component {
   }
 
   componentDidMount() {
-    const { onMapInstantiated, enableMapClick } = this.props;
+    const { defaultCenter, defaultZoom, onMapInstantiated, enableMapClick } = this.props;
     this.map = new BMap.Map(this.id, { enableMapClick: enableMapClick }); // eslint-disable-line no-undef
-    this.map.centerAndZoom(new BMap.Point(116.404, 39.915), 11); // eslint-disable-line no-undef
+    const center = defaultCenter || { lng: 116.404, lat: 39.915 };
+    const zoom = defaultZoom || 11;
+    this.map.centerAndZoom(toBMapPoint(center), zoom);
     if (onMapInstantiated) {
       onMapInstantiated(this);
     }
@@ -242,6 +246,10 @@ class BaiduMap extends React.Component {
       }
       return React.cloneElement(child, hasPropTypes ? { [MAP]: map } : {});
     });
+  }
+
+  getBMap() {
+    return this.map;
   }
 }
 
