@@ -203,6 +203,14 @@ for (let i = 0; i < MAX; i++) {
 </MarkerClusterer> 
 ```
 
+### InfoWindow
+
+```js
+<Marker position={{ lng: 116.404, lat: 39.915 }}>
+  <InfoWindow content="marker infoWindow" offset={{ width: 0, height: -20 }} />
+</Marker>
+```
+
 ### Controls
 
 All Baidu Maps controls are supported.

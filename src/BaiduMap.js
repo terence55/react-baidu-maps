@@ -200,7 +200,7 @@ class BaiduMap extends React.Component {
 
   setRestrictedBounds() {
     if (this.isRestricted) {
-      this.clearBounds();
+      this.clearRestrictedBounds();
     }
     this.map.addEventListener('moveend', this.onAdjustBounds);
     this.isRestricted = true;

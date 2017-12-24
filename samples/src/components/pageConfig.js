@@ -5,6 +5,7 @@ import AsyncDemo from './AsyncDemo';
 import RestrictedDemo from './RestrictedDemo';
 import CustomStyleDemo from './CustomStyleDemo';
 import ControlsDemo from './ControlsDemo';
+import InfoWindowDemo from './InfoWindowDemo';
 
 const config = [
   {
@@ -36,6 +37,11 @@ const config = [
     type: 'controls',
     link: '/component/controls',
     comp: <ControlsDemo />
+  },
+  {
+    type: 'infowindow',
+    link: '/component/infowindow',
+    comp: <InfoWindowDemo />
   }
 ];
 

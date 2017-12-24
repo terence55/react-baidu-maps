@@ -22,7 +22,7 @@ const controlledPropUpdater = {
   copyrights(obj, arg) {
     const oldCopyrights = obj.getCopyrightCollection();
     if (oldCopyrights && oldCopyrights.length > 0) {
-      obj.getCopyrightCollection.splice(0, oldCopyrights.length);
+      obj.getCopyrightCollection().splice(0, oldCopyrights.length);
     }
     if (arg && arg.length > 0) {
       arg.forEach(item => obj.addCopyright({

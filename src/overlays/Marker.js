@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP, MARKER_CLUSTERER } from '../utils/constants';
+import { MAP, MARKER_CLUSTERER, MARKER } from '../utils/constants';
 import { Point, Size, Icon, Label } from '../utils/MapPropTypes';
 import { getMarkerAnimation, toBMapPoint, toBMapSize, toBMapIcon, toBMapLabel } from '../utils/typeTransform';
 
@@ -96,12 +96,23 @@ class Marker extends React.Component {
     } else {
       this.props[MAP].addOverlay(this.marker);
     }
+    this.forceUpdate();
   }
 
   render() {
     const { children } = this.props; // eslint-disable-line react/prop-types
+    const marker = this.marker;
     if (children) {
-      return <div>{children}</div>;
+      return (
+        <div>
+          {React.Children.map(children, (child) => {
+            const hasPropTypes = child.type.propTypes && child.type.propTypes[MARKER] !== undefined;
+            if (!hasPropTypes) {
+              return child;
+            }
+            return React.cloneElement(child, { [MARKER]: marker });
+          })}
+        </div>);
     }
     return false;
   }
