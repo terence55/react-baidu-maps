@@ -24,6 +24,8 @@ export { default as Polyline } from './overlays/Polyline';
 
 export { default as Rectangle } from './overlays/Rectangle';
 
+export { default as InfoWindow } from './overlays/InfoWindow';
+
 // Controls
 
 export { default as CopyrightControl } from './controls/CopyrightControl';
