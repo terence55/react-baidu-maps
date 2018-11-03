@@ -15,6 +15,22 @@ export default class SimpleDemo extends React.Component {
   }
 
   render() {
+    const style = [
+      {
+        featureType: 'highway',
+        elementType: 'all',
+        stylers: {
+          color: '#8e7cc3ff'
+        }
+      },
+      {
+        featureType: 'background',
+        elementType: 'all',
+        stylers: {
+          color: '#3d85c6ff'
+        }
+      }
+    ];
     return (
       <div>
         <div style={{ background: '#444', height: '200px' }}>
@@ -31,6 +47,7 @@ export default class SimpleDemo extends React.Component {
           <button onClick={() => { this.setState({ center: { lng: 113.352135, lat: 23.132866 } }); }}>Center3</button>
           <BaiduMap
             id="map2"
+            mapStyle={style}
             defaultCenter={defaultCenter}
             defaultZoom={defaultZoom}
             enableScrollWheelZoom

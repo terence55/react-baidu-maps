@@ -6,6 +6,7 @@ import RestrictedDemo from './RestrictedDemo';
 import CustomStyleDemo from './CustomStyleDemo';
 import ControlsDemo from './ControlsDemo';
 import InfoWindowDemo from './InfoWindowDemo';
+import SimpleDemoV3 from './SimpleDemoV3';
 
 const config = [
   {
@@ -42,6 +43,11 @@ const config = [
     type: 'infowindow',
     link: '/component/infowindow',
     comp: <InfoWindowDemo />
+  },
+  {
+    type: 'simplev3',
+    link: '/component/simplev3',
+    comp: <SimpleDemoV3 />
   }
 ];
 

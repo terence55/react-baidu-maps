@@ -45,7 +45,7 @@ const controlledPropUpdater = {
   draggingCursor(obj, arg) { obj.setDraggingCursor(arg); },
   minZoom(obj, arg) { obj.setMinZoom(arg); },
   maxZoom(obj, arg) { obj.setMaxZoom(arg); },
-  mapStyle(obj, arg) { obj.setMapStyle({ styleJson: arg }); },
+  mapStyle(obj, arg) { if (obj.setMapStyleV2) obj.setMapStyleV2({ styleJson: arg }); else obj.setMapStyle({ styleJson: arg }); },
   mapType(obj, arg) { obj.setMapType(getMapType(arg)); },
   highResolutionEnabled(obj, arg) { obj.highResolutionEnabled(arg); }
 };
