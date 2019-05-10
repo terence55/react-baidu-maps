@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router'; // eslint-disable-line import/no-extraneous-dependencies
 import { config } from './pageConfig';
 
-const MainComponent = React.createClass({
-  propTypes: {
+class MainComponent extends React.Component {
+  static propTypes = {
     children: PropTypes.element,
     params: PropTypes.object
-  },
-  render: function () {
+  };
+
+  render() {
     return (
       <div>
         <h1>Maps {this.props.params.type}</h1>
@@ -19,6 +20,6 @@ const MainComponent = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default MainComponent;

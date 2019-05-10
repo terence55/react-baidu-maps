@@ -9,9 +9,9 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: ''
   },
+  mode: 'development',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }),
     new webpack.DefinePlugin({
       __DEBUG__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
     })
@@ -22,9 +22,9 @@ module.exports = {
     dns: 'empty'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.jsx?$/,
-      loader: 'react-hot-loader!babel-loader',
+      loader: 'babel-loader',
       exclude: /node_modules/
     }, {
       test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

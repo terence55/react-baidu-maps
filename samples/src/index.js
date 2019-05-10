@@ -4,14 +4,17 @@ import { Router, Route, hashHistory } from 'react-router'; // eslint-disable-lin
 import MainComponent from './components/MainComponent';
 import ContentComponent from './components/ContentComponent';
 
-const Index = React.createClass({
-  render: () => (
-    <div>
-      <Router history={hashHistory}>
-        <Route path="/" component={MainComponent}>
-          <Route path="/component/:type" component={ContentComponent} />
-        </Route>
-      </Router>
-    </div>)
-});
+class Index extends React.Component {
+  render() {
+    return (
+      <div>
+        <Router history={hashHistory}>
+          <Route path="/" component={MainComponent}>
+            <Route path="/component/:type" component={ContentComponent} />
+          </Route>
+        </Router>
+      </div>);
+  }
+}
+
 render(<Index />, document.getElementById('app'));
