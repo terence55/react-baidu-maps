@@ -111,7 +111,9 @@ export default class OverlayDemo extends React.Component {
             <Curve path={polygon} strokeWeight={2} strokeColor="red" />
             <Ground bounds={{ sw: { lng: 116.424319, lat: 39.907408 }, ne: { lng: 116.442285, lat: 39.914714 } }} imageUrl="http://lbsyun.baidu.com/jsdemo/img/si-huan.png" />
             <MarkerClusterer>
-              {markerClusterer.map(position => <Marker position={position} />)}
+              {
+                markerClusterer.map((position, index) => <Marker key={index} position={position} />) // eslint-disable-line react/no-array-index-key
+              }
             </MarkerClusterer>
             <Overlay
               constructorParams={{
