@@ -6,12 +6,9 @@ samples
 src
 dist
 .babelrc
-.eslintrc.json
+.eslintrc.js
 .npmignore
 .eslintignore
 *.sh
 webpack.config.js
-webpack.config.build.js
-server.js
-config.js
 npm-debug.log

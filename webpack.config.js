@@ -1,46 +1,52 @@
 var path = require('path');
 var webpack = require('webpack');
 
+process.env.NODE_ENV = 'development';
+
 module.exports = {
   devtool: 'eval',
-  entry: ['webpack-hot-middleware/client', './samples/src/index.js'],
+  entry: ['./samples/src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: ''
   },
   mode: 'development',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      __DEBUG__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-    })
-  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'samples/'),
+    compress: false,
+    watchContentBase: true,
+    hot: true,
+    port: 8700
+  },
   node: {
+    module: 'empty',
+    dgram: 'empty',
+    dns: 'mock',
+    fs: 'empty',
+    http2: 'empty',
     net: 'empty',
     tls: 'empty',
-    dns: 'empty'
+    child_process: 'empty'
   },
   module: {
     rules: [{
       test: /\.jsx?$/,
       loader: 'babel-loader',
-      exclude: /node_modules/
-    }, {
-      test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'file-loader'
-    }, {
-      test: /\.less/,
-      loader: 'style-loader!css-loader!less-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
+      exclude: /node_modules/,
+      options: {
+        presets: [
+          "@babel/preset-env",
+          "@babel/preset-react",
+          {
+            plugins: [
+              '@babel/plugin-proposal-class-properties'
+            ]
+          }
+        ]
+      }
     }]
-  }
+  },
+  plugins: [
+  ]
 };
