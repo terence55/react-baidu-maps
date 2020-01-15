@@ -3,10 +3,10 @@ import SimpleDemo from './SimpleDemo';
 import OverlayDemo from './OverlayDemo';
 import AsyncDemo from './AsyncDemo';
 import RestrictedDemo from './RestrictedDemo';
-import CustomStyleDemo from './CustomStyleDemo';
+import CustomStyleDemoV2 from './CustomStyleDemoV2';
 import ControlsDemo from './ControlsDemo';
 import InfoWindowDemo from './InfoWindowDemo';
-import SimpleDemoV3 from './SimpleDemoV3';
+import CustomStyleDemo from './CustomStyleDemo';
 
 const config = [
   {
@@ -30,9 +30,9 @@ const config = [
     comp: <RestrictedDemo />
   },
   {
-    type: 'customstyle',
-    link: '/component/customstyle',
-    comp: <CustomStyleDemo />
+    type: 'customstylev2',
+    link: '/component/customstylev2',
+    comp: <CustomStyleDemoV2 />
   },
   {
     type: 'controls',
@@ -45,16 +45,10 @@ const config = [
     comp: <InfoWindowDemo />
   },
   {
-    type: 'simplev3',
-    link: '/component/simplev3',
-    comp: <SimpleDemoV3 />
+    type: 'customstylev3',
+    link: '/component/customstylev3',
+    comp: <CustomStyleDemo />
   }
 ];
 
-const pageMap = {};
-config.forEach((item) => { pageMap[item.type] = item.comp; });
-
-export default {
-  config: config,
-  pageMap: pageMap
-};
+export default config;

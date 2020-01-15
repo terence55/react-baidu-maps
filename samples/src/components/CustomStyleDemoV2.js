@@ -5,18 +5,26 @@ import {MAP_KEY} from '../config';
 
 const AsyncMap = asyncWrapper(BaiduMap);
 
-export default class RestrictedDemo extends React.Component {
+export default class CustomStyleDemo extends React.Component {
   render() {
-    const bounds = {
-      sw: {
-        lng: 116.027143,
-        lat: 39.772348
+    const styleJson = [
+      {
+        featureType: 'all',
+        elementType: 'geometry',
+        stylers: {
+          hue: '#007fff',
+          saturation: 89
+        }
       },
-      ne: {
-        lng: 116.832025,
-        lat: 40.126349
+      {
+        featureType: 'water',
+        elementType: 'all',
+        stylers: {
+          color: '#ffffff'
+        }
       }
-    };
+    ];
+    // Should remove <script> in html for v3 to display old style correctly
     return (
       <div>
         <div style={{background: '#444', height: '400px'}}>
@@ -26,8 +34,8 @@ export default class RestrictedDemo extends React.Component {
             id='asyncmap'
             enableScrollWheelZoom
             enableDragging
-            zoom={13}
-            restrictedBounds={bounds}
+            zoom={15}
+            mapStyle={styleJson}
             mapContainer={<div style={{height: '100%'}} />}
           />
         </div>

@@ -1,15 +1,14 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
 process.env.NODE_ENV = 'development';
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'cheap-module-source-map',
   entry: ['./samples/src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: ''
+    publicPath: '/'
   },
   mode: 'development',
   devServer: {
@@ -17,17 +16,10 @@ module.exports = {
     compress: false,
     watchContentBase: true,
     hot: true,
-    port: 8700
-  },
-  node: {
-    module: 'empty',
-    dgram: 'empty',
-    dns: 'mock',
-    fs: 'empty',
-    http2: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
+    port: 8700,
+    historyApiFallback: {
+      disableDotRule: true
+    }
   },
   module: {
     rules: [{
@@ -36,8 +28,8 @@ module.exports = {
       exclude: /node_modules/,
       options: {
         presets: [
-          "@babel/preset-env",
-          "@babel/preset-react",
+          '@babel/preset-env',
+          '@babel/preset-react',
           {
             plugins: [
               '@babel/plugin-proposal-class-properties'

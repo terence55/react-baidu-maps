@@ -1,5 +1,5 @@
 import React from 'react';
-import { MAP_KEY } from '../config';
+import {MAP_KEY} from '../config';
 import BaiduMap from '../../../src/BaiduMap';
 import asyncWrapper from '../../../src/async/asyncWrapper';
 import Marker from '../../../src/overlays/Marker';
@@ -86,30 +86,32 @@ export default class OverlayDemo extends React.Component {
     const mouseoverTxt = `${txt} ${parseInt(Math.random() * 1000, 10)}套`;
     return (
       <div>
-        <div style={{ background: '#444', height: '500px' }}>
+        <div style={{background: '#444', height: '500px'}}>
           <AsyncMap
             mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
             loadingElement={<div>Loading.....</div>}
-            ref="map"
-            id="asyncmap"
+            ref='map'
+            id='asyncmap'
             enableScrollWheelZoom
             enableDragging
             zoom={this.state.zoom}
-            mapContainer={<div style={{ height: '100%' }} />}>
-            <Marker position={{ lng: 116.404, lat: 39.915 }} />
-            <Marker position={{ lng: 116.424175, lat: 39.923568 }} animation="bounce" />
+            mapContainer={<div style={{height: '100%'}} />}
+          >
+            <Marker position={{lng: 116.404, lat: 39.915}} />
+            <Marker position={{lng: 116.424175, lat: 39.923568}} animation='bounce' />
             <Marker
-              position={{ lng: 116.380985, lat: 39.905914 }}
-              icon={{ imageUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', size: { width: 300, height: 171 } }} />
-            <Marker position={{ lng: 116.380338, lat: 39.922184 }} enableDragging label={{ content: 'I\'m draggable.', offset: { width: 0, height: -16 } }} />
-            <Circle center={{ lng: 116.404, lat: 39.915 }} radius={500} strokeColor="red" strokeWeight={2} />
+              position={{lng: 116.380985, lat: 39.905914}}
+              icon={{imageUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', size: {width: 300, height: 171}}}
+            />
+            <Marker position={{lng: 116.380338, lat: 39.922184}} enableDragging label={{content: 'I\'m draggable.', offset: {width: 0, height: -16}}} />
+            <Circle center={{lng: 116.404, lat: 39.915}} radius={500} strokeColor='red' strokeWeight={2} />
             <Polygon path={polygon} strokeWeight={2} />
             <Polygon path={polygonEditable} strokeWeight={2} enableEditing />
-            <Polyline path={polyline} strokeWeight={2} strokeColor="green" />
-            <Rectangle bounds={{ sw: { lng: 116.392214, lat: 39.911901 }, ne: { lng: 116.41478, lat: 39.918985 } }} strokeWeight={2} strokeColor="yellow" />
-            <Label position={{ lng: 116.365139, lat: 39.916595 }} content="Label Demo" offset={{ width: 30, height: -30 }} />
-            <Curve path={polygon} strokeWeight={2} strokeColor="red" />
-            <Ground bounds={{ sw: { lng: 116.424319, lat: 39.907408 }, ne: { lng: 116.442285, lat: 39.914714 } }} imageUrl="http://lbsyun.baidu.com/jsdemo/img/si-huan.png" />
+            <Polyline path={polyline} strokeWeight={2} strokeColor='green' />
+            <Rectangle bounds={{sw: {lng: 116.392214, lat: 39.911901}, ne: {lng: 116.41478, lat: 39.918985}}} strokeWeight={2} strokeColor='yellow' />
+            <Label position={{lng: 116.365139, lat: 39.916595}} content='Label Demo' offset={{width: 30, height: -30}} />
+            <Curve path={polygon} strokeWeight={2} strokeColor='red' />
+            <Ground bounds={{sw: {lng: 116.424319, lat: 39.907408}, ne: {lng: 116.442285, lat: 39.914714}}} imageUrl='http://lbsyun.baidu.com/jsdemo/img/si-huan.png' />
             <MarkerClusterer>
               {
                 markerClusterer.map((position, index) => <Marker key={index} position={position} />) // eslint-disable-line react/no-array-index-key
@@ -163,14 +165,14 @@ export default class OverlayDemo extends React.Component {
                 arrow.style.overflow = 'hidden';
                 div.appendChild(arrow);
 
-                div.onmouseover = function () {
+                div.onmouseover = function() {
                   this.style.backgroundColor = '#6BADCA';
                   this.style.borderColor = '#0000ff';
                   this.getElementsByTagName('span')[0].innerHTML = that._overText;
                   arrow.style.backgroundPosition = '0px -20px';
                 };
 
-                div.onmouseout = function () {
+                div.onmouseout = function() {
                   this.style.backgroundColor = '#EE5D5B';
                   this.style.borderColor = '#BC3B3A';
                   this.getElementsByTagName('span')[0].innerHTML = that._text;
@@ -186,7 +188,8 @@ export default class OverlayDemo extends React.Component {
                 const pixel = map.pointToOverlayPixel(self._point);
                 self._div.style.left = `${pixel.x - parseInt(self._arrow.style.left, 10)}px`;
                 self._div.style.top = `${pixel.y - 30}px`;
-              }} />
+              }}
+            />
           </AsyncMap>
         </div>
       </div>

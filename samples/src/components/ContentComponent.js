@@ -1,18 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { pageMap } from './pageConfig';
+import {useParams} from 'react-router-dom'; // eslint-disable-line import/no-extraneous-dependencies
+import config from './pageConfig';
 
-class ContentComponent extends React.Component {
-  static propTypes = {
-    params: PropTypes.object
-  };
-
-  render() {
-    if (pageMap[this.props.params.type] !== undefined) {
-      return pageMap[this.props.params.type];
-    }
-    return (<div>Not Match</div>);
+function ContentComponent() {
+  const {type} = useParams();
+  const pageMap = {};
+  config.forEach((item) => { pageMap[item.type] = item.comp; });
+  if (pageMap[type] !== undefined) {
+    return pageMap[type];
   }
+  return (<div>Not Match</div>); 
 }
 
 export default ContentComponent;

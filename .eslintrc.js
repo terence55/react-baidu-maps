@@ -75,6 +75,7 @@ module.exports = {
     "react/require-default-props": "off", // Enforce a defaultProps definition for every prop that is not a required prop
     "react/forbid-prop-types": "off", // Forbid certain propTypes
     "react/jsx-props-no-spreading": "off", // Disallow JSX props spreading
+    "react/static-property-placement": "off",
     
     // jsx-a11y
     'jsx-a11y/no-static-element-interactions': 'off', // Enforce that non-interactive, visible elements (such as <div>) that have click handlers use the role attribute
