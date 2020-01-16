@@ -1,17 +1,6 @@
 import React from 'react';
+import {BaiduMap, asyncWrapper, Marker, Circle, Polygon, Polyline, Rectangle, Label, Curve, Ground, MarkerClusterer, Overlay} from 'react-baidu-maps';
 import {MAP_KEY} from '../config';
-import BaiduMap from '../../../src/BaiduMap';
-import asyncWrapper from '../../../src/async/asyncWrapper';
-import Marker from '../../../src/overlays/Marker';
-import Circle from '../../../src/overlays/Circle';
-import Polygon from '../../../src/overlays/Polygon';
-import Polyline from '../../../src/overlays/Polyline';
-import Rectangle from '../../../src/overlays/Rectangle';
-import Label from '../../../src/overlays/Label';
-import Curve from '../../../src/overlays/Curve';
-import Ground from '../../../src/overlays/Ground';
-import MarkerClusterer from '../../../src/overlays/MarkerClusterer';
-import Overlay from '../../../src/overlays/Overlay';
 
 const AsyncMap = asyncWrapper(BaiduMap);
 
@@ -83,14 +72,13 @@ export default class OverlayDemo extends React.Component {
       });
     }
     const txt = '银湖海岸城';
-    const mouseoverTxt = `${txt} ${parseInt(Math.random() * 1000, 10)}套`;
+    const mouseoverTxt = `${txt} ${parseInt(Math.random() * 1000)}套`;
     return (
       <div>
         <div style={{background: '#444', height: '500px'}}>
           <AsyncMap
             mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
             loadingElement={<div>Loading.....</div>}
-            ref='map'
             id='asyncmap'
             enableScrollWheelZoom
             enableDragging
@@ -128,17 +116,17 @@ export default class OverlayDemo extends React.Component {
               }}
               customConstructor={(self, params) => {
                 console.warn('constructor');
-                self._point = new BMap.Point(params.point.lng, params.point.lat); // eslint-disable-line no-undef
-                self._text = params.text;
-                self._overText = params.mouseoverText;
+                self.point = new BMap.Point(params.point.lng, params.point.lat); // eslint-disable-line no-undef
+                self.text = params.text;
+                self.overText = params.mouseoverText;
               }}
               initialize={(self, map) => {
-                console.warn('initialize', self._point, self._text);
-                self._map = map;
+                console.warn('initialize', self.point, self.text);
+                self.map = map;
                 const div = document.createElement('div');
-                self._div = div;
+                self.div = div;
                 div.style.position = 'absolute';
-                div.style.zIndex = BMap.Overlay.getZIndex(self._point.lat); // eslint-disable-line no-undef
+                div.style.zIndex = BMap.Overlay.getZIndex(self.point.lat); // eslint-disable-line no-undef
                 div.style.backgroundColor = '#EE5D5B';
                 div.style.border = '1px solid #BC3B3A';
                 div.style.color = 'white';
@@ -149,13 +137,13 @@ export default class OverlayDemo extends React.Component {
                 div.style.MozUserSelect = 'none';
                 div.style.fontSize = '12px';
                 const span = document.createElement('span');
-                self._span = span;
+                self.span = span;
                 div.appendChild(span);
-                span.appendChild(document.createTextNode(self._text));
+                span.appendChild(document.createTextNode(self.text));
                 const that = self;
 
                 const arrow = document.createElement('div');
-                self._arrow = arrow;
+                self.arrow = arrow;
                 arrow.style.background = 'url(http://map.baidu.com/fwmap/upload/r/map/fwmap/static/house/images/label.png) no-repeat';
                 arrow.style.position = 'absolute';
                 arrow.style.width = '11px';
@@ -168,14 +156,14 @@ export default class OverlayDemo extends React.Component {
                 div.onmouseover = function() {
                   this.style.backgroundColor = '#6BADCA';
                   this.style.borderColor = '#0000ff';
-                  this.getElementsByTagName('span')[0].innerHTML = that._overText;
+                  this.getElementsByTagName('span')[0].innerHTML = that.overText;
                   arrow.style.backgroundPosition = '0px -20px';
                 };
 
                 div.onmouseout = function() {
                   this.style.backgroundColor = '#EE5D5B';
                   this.style.borderColor = '#BC3B3A';
-                  this.getElementsByTagName('span')[0].innerHTML = that._text;
+                  this.getElementsByTagName('span')[0].innerHTML = that.text;
                   arrow.style.backgroundPosition = '0px 0px';
                 };
 
@@ -184,10 +172,10 @@ export default class OverlayDemo extends React.Component {
               }}
               draw={(self) => {
                 console.warn('draw');
-                const map = self._map;
-                const pixel = map.pointToOverlayPixel(self._point);
-                self._div.style.left = `${pixel.x - parseInt(self._arrow.style.left, 10)}px`;
-                self._div.style.top = `${pixel.y - 30}px`;
+                const map = self.map;
+                const pixel = map.pointToOverlayPixel(self.point);
+                self.div.style.left = `${pixel.x - parseInt(self.arrow.style.left)}px`;
+                self.div.style.top = `${pixel.y - 30}px`;
               }}
             />
           </AsyncMap>

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Size } from '../utils/MapPropTypes';
-import { getLengthUnit, getControlAnchor, toBMapSize } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Size} from '../utils/MapPropTypes';
+import {getLengthUnit, getControlAnchor, toBMapSize} from '../utils/typeTransform';
 
 /**
  * ScaleControl
@@ -24,21 +24,17 @@ const publicMethodMap = [
 
 class ScaleControl extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size)
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.scaleControl;
   }
 
   componentDidMount() {
-    const { anchor, offset } = this.props; // eslint-disable-line react/prop-types
+    const {anchor, offset} = this.props; // eslint-disable-line react/prop-types
     const option = {};
     if (anchor) {
       option.anchor = getControlAnchor(anchor);
@@ -51,7 +47,7 @@ class ScaleControl extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

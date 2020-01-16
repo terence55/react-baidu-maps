@@ -33,7 +33,7 @@ function wrapControlledPropTypes(WrappedComponent, controlledPropTypes, controll
     return WrappedComponent;
   }
   if (controlledPropTypes && Object.keys(controlledPropTypes).length > 0) {
-    WrappedComponent.prototype.componentDidMount = function () {
+    WrappedComponent.prototype.componentDidMount = function() {
       if (componentDidMount) {
         componentDidMount.call(this);
       }
@@ -46,7 +46,7 @@ function wrapControlledPropTypes(WrappedComponent, controlledPropTypes, controll
         }
       });
     };
-    WrappedComponent.prototype.componentDidUpdate = function (prevProps, prevState) {
+    WrappedComponent.prototype.componentDidUpdate = function(prevProps, prevState) {
       Object.keys(controlledPropTypes).forEach((key) => {
         const nextValue = this.props[key];
         const fn = controlledPropUpdater[key];
@@ -83,20 +83,20 @@ function wrapEvents(WrappedComponent, eventMap) {
   const componentDidMount = WrappedComponent.prototype.componentDidMount;
   const componentWillUnmount = WrappedComponent.prototype.componentWillUnmount;
   if (eventMap && eventMap.length > 0) {
-    WrappedComponent.prototype.componentDidMount = function () {
+    WrappedComponent.prototype.componentDidMount = function() {
       if (componentDidMount) {
         componentDidMount.call(this);
       }
       registerEvents(this, getInstanceFromComponent(this), eventMap);
     };
-    WrappedComponent.prototype.componentDidUpdate = function (prevProps, prevState) {
+    WrappedComponent.prototype.componentDidUpdate = function(prevProps, prevState) {
       unregisterEvents(this, getInstanceFromComponent(this));
       if (componentDidUpdate) {
         componentDidUpdate.call(this, prevProps, prevState);
       }
       registerEvents(this, getInstanceFromComponent(this), eventMap);
     };
-    WrappedComponent.prototype.componentWillUnmount = function () {
+    WrappedComponent.prototype.componentWillUnmount = function() {
       unregisterEvents(this, getInstanceFromComponent(this));
       if (componentWillUnmount) {
         componentWillUnmount.call(this);

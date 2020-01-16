@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP, MARKER_CLUSTERER } from '../utils/constants';
+import {MAP, MARKER_CLUSTERER} from '../utils/constants';
 
 /**
  * MarkerClusterer
@@ -35,7 +35,7 @@ const publicMethodMap = [
 
 class MarkerClusterer extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object
+    [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
   constructor(props) {
@@ -49,16 +49,17 @@ class MarkerClusterer extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     const markerClusterer = this.markerClusterer;
     if (children) {
       return (
         <div>
           {React.Children.map(children, (child) => {
             const hasPropTypes = child.type.propTypes && child.type.propTypes[MARKER_CLUSTERER] !== undefined;
-            return React.cloneElement(child, hasPropTypes ? { [MARKER_CLUSTERER]: markerClusterer } : {});
+            return React.cloneElement(child, hasPropTypes ? {[MARKER_CLUSTERER]: markerClusterer} : {});
           })}
-        </div>);
+        </div>
+      );
     }
     return false;
   }

@@ -9,7 +9,7 @@ function ContentComponent() {
   if (pageMap[type] !== undefined) {
     return pageMap[type];
   }
-  return (<div>Not Match</div>); 
+  return (<div>Not Match</div>);
 }
 
 export default ContentComponent;

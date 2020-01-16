@@ -39,4 +39,4 @@ const Label = {
   zIndex: PropTypes.number
 };
 
-export { Point, Size, Bounds, Icon, Label };
+export {Point, Size, Bounds, Icon, Label};

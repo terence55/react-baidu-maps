@@ -1,9 +1,6 @@
 import React from 'react';
-import BaiduMap from '../../../src/BaiduMap';
-import asyncWrapper from '../../../src/async/asyncWrapper';
+import {BaiduMap, asyncWrapper, InfoWindow, Marker} from 'react-baidu-maps';
 import {MAP_KEY} from '../config';
-import InfoWindow from '../../../src/overlays/InfoWindow';
-import Marker from '../../../src/overlays/Marker';
 
 const AsyncMap = asyncWrapper(BaiduMap);
 

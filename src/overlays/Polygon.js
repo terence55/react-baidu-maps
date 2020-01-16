@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Point } from '../utils/MapPropTypes';
-import { toBMapPoint } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Point} from '../utils/MapPropTypes';
+import {toBMapPoint} from '../utils/typeTransform';
 
 /**
  * Polygon
@@ -23,7 +23,7 @@ const controlledPropTypes = {
 };
 
 const controlledPropUpdater = {
-  path(obj, arg) { obj.setPath(arg.map(point => toBMapPoint(point))); },
+  path(obj, arg) { obj.setPath(arg.map((point) => toBMapPoint(point))); },
   strokeColor(obj, arg) { obj.setStrokeColor(arg); },
   fillColor(obj, arg) { obj.setFillColor(arg); },
   strokeOpacity(obj, arg) { obj.setStrokeOpacity(arg); },
@@ -62,25 +62,21 @@ const eventMap = [
 
 class Polygon extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object
+    [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.polygon;
   }
 
   componentDidMount() {
-    const { path } = this.props; // eslint-disable-line react/prop-types
-    this.polygon = new BMap.Polygon(path.map(point => toBMapPoint(point))); // eslint-disable-line no-undef
+    const {path} = this.props; // eslint-disable-line react/prop-types
+    this.polygon = new BMap.Polygon(path.map((point) => toBMapPoint(point))); // eslint-disable-line no-undef
     this.props[MAP].addOverlay(this.polygon);
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP, MARKER_CLUSTERER, MARKER } from '../utils/constants';
-import { Point, Size, Icon, Label } from '../utils/MapPropTypes';
-import { getMarkerAnimation, toBMapPoint, toBMapSize, toBMapIcon, toBMapLabel } from '../utils/typeTransform';
+import {MAP, MARKER_CLUSTERER, MARKER} from '../utils/constants';
+import {Point, Size, Icon, Label} from '../utils/MapPropTypes';
+import {getMarkerAnimation, toBMapPoint, toBMapSize, toBMapIcon, toBMapLabel} from '../utils/typeTransform';
 
 /**
  * Marker
@@ -76,20 +76,16 @@ const eventMap = [
 
 class Marker extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
-    [MARKER_CLUSTERER]: PropTypes.object
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+    [MARKER_CLUSTERER]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.marker;
   }
 
   componentDidMount() {
-    const { position } = this.props; // eslint-disable-line react/prop-types
+    const {position} = this.props; // eslint-disable-line react/prop-types
     this.marker = new BMap.Marker(toBMapPoint(position)); // eslint-disable-line no-undef
     if (this.props[MARKER_CLUSTERER]) {
       this.props[MARKER_CLUSTERER].addMarker(this.marker);
@@ -100,7 +96,7 @@ class Marker extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     const marker = this.marker;
     if (children) {
       return (
@@ -110,9 +106,10 @@ class Marker extends React.Component {
             if (!hasPropTypes) {
               return child;
             }
-            return React.cloneElement(child, { [MARKER]: marker });
+            return React.cloneElement(child, {[MARKER]: marker});
           })}
-        </div>);
+        </div>
+      );
     }
     return false;
   }

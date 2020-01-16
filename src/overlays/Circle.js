@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Point } from '../utils/MapPropTypes';
-import { toBMapPoint } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Point} from '../utils/MapPropTypes';
+import {toBMapPoint} from '../utils/typeTransform';
 
 /**
  * Circle
@@ -64,25 +64,21 @@ const eventMap = [
 
 class Circle extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object
+    [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.circle;
   }
 
   componentDidMount() {
-    const { center } = this.props; // eslint-disable-line react/prop-types
+    const {center} = this.props; // eslint-disable-line react/prop-types
     this.circle = new BMap.Circle(toBMapPoint(center)); // eslint-disable-line no-undef
     this.props[MAP].addOverlay(this.circle);
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

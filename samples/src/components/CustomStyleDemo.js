@@ -1,5 +1,5 @@
 import React from 'react';
-import BaiduMap from '../../../src/BaiduMap';
+import {BaiduMap} from 'react-baidu-maps';
 
 const defaultZoom = 15;
 const defaultCenter = {lng: 118.127294, lat: 24.438853};

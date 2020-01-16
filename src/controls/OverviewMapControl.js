@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Size } from '../utils/MapPropTypes';
-import { getControlAnchor, toBMapSize } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Size} from '../utils/MapPropTypes';
+import {getControlAnchor, toBMapSize} from '../utils/typeTransform';
 
 /**
  * OverviewMapControl
@@ -30,22 +30,18 @@ const eventMap = [
 
 class OverviewMapControl extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size),
     isOpen: PropTypes.bool
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.overviewMapControl;
   }
 
   componentDidMount() {
-    const { size, anchor, offset, isOpen } = this.props; // eslint-disable-line react/prop-types
+    const {size, anchor, offset, isOpen} = this.props; // eslint-disable-line react/prop-types
     const option = {};
     if (size) {
       option.size = toBMapSize(size);
@@ -64,7 +60,7 @@ class OverviewMapControl extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

@@ -76,6 +76,7 @@ module.exports = {
     "react/forbid-prop-types": "off", // Forbid certain propTypes
     "react/jsx-props-no-spreading": "off", // Disallow JSX props spreading
     "react/static-property-placement": "off",
+    "react/forbid-foreign-prop-types": "off",
     
     // jsx-a11y
     'jsx-a11y/no-static-element-interactions': 'off', // Enforce that non-interactive, visible elements (such as <div>) that have click handlers use the role attribute

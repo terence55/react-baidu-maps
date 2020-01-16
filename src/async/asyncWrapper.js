@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import getDisplayName from '../utils/getDisplayName';
 
@@ -32,7 +32,7 @@ export default function asyncWrapper(WrappedComponent) {
     }
 
     componentDidMount() {
-      const { useScriptjs, mapUrl } = this.props;
+      const {useScriptjs, mapUrl} = this.props;
       if (typeof BMap !== 'undefined') {
         this.handleLoaded();
         return;
@@ -62,21 +62,21 @@ export default function asyncWrapper(WrappedComponent) {
       this.setState({
         loading: false
       });
-      const { onMapSrcLoaded } = this.props;
+      const {onMapSrcLoaded} = this.props;
       if (onMapSrcLoaded) {
         onMapSrcLoaded();
       }
     }
 
     getWrappedInstance() {
-      return this.refs[`wrappedInstanceMap${this.props.id}`]; // eslint-disable-line react/prop-types
+      return this[`wrappedInstanceMap${this.props.id}`];
     }
 
     render() {
-      const { useScriptjs, mapUrl, loadingElement, onMapSrcLoaded, ...restProps } = this.props;
-      const { loading } = this.state;
+      const {useScriptjs, mapUrl, loadingElement, onMapSrcLoaded, ...restProps} = this.props;
+      const {loading} = this.state;
       if (!loading) {
-        return <WrappedComponent ref={`wrappedInstanceMap${this.props.id}`} {...restProps} />; // eslint-disable-line react/prop-types
+        return <WrappedComponent ref={(instance) => { this[`wrappedInstanceMap${this.props.id}`] = instance; }} {...restProps} />; // eslint-disable-line react/prop-types
       }
       return loadingElement;
     }

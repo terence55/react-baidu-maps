@@ -21,6 +21,11 @@ module.exports = {
       disableDotRule: true
     }
   },
+  resolve: {
+    alias: {
+      'react-baidu-maps': path.resolve(__dirname, './src/')
+    }
+  },
   module: {
     rules: [{
       test: /\.jsx?$/,

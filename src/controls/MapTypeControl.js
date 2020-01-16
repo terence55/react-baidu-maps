@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MAP } from '../utils/constants';
-import { Size } from '../utils/MapPropTypes';
-import { getMapTypeControlType, getMapType, getControlAnchor, toBMapSize } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Size} from '../utils/MapPropTypes';
+import {getMapTypeControlType, getMapType, getControlAnchor, toBMapSize} from '../utils/typeTransform';
 
 /**
  * MapTypeControl
@@ -11,29 +11,25 @@ import { getMapTypeControlType, getMapType, getControlAnchor, toBMapSize } from 
 
 class MapTypeControl extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     type: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     mapTypes: PropTypes.arrayOf(PropTypes.oneOf(['normal', 'perspective', 'satellite', 'hybrid'])),
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size)
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   getInstanceFromComponent(component) {
     return component.mapTypeControl;
   }
 
   componentDidMount() {
-    const { type, mapTypes, anchor, offset } = this.props; // eslint-disable-line react/prop-types
+    const {type, mapTypes, anchor, offset} = this.props; // eslint-disable-line react/prop-types
     const option = {};
     if (type) {
       option.type = getMapTypeControlType(type);
     }
     if (mapTypes && mapTypes.length > 0) {
-      option.mapTypes = mapTypes.map(mapType => getMapType(mapType));
+      option.mapTypes = mapTypes.map((mapType) => getMapType(mapType));
     }
     if (anchor) {
       option.anchor = getControlAnchor(anchor);
@@ -46,7 +42,7 @@ class MapTypeControl extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Bounds } from '../utils/MapPropTypes';
+import {MAP} from '../utils/constants';
+import {Bounds} from '../utils/MapPropTypes';
 
 /**
  * Rectangle
@@ -59,20 +59,16 @@ const eventMap = [
 
 class Rectangle extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     bounds: PropTypes.shape(Bounds)
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.rectangle;
   }
 
   componentDidMount() {
-    const { bounds } = this.props;
+    const {bounds} = this.props;
     const points = [
       new BMap.Point(bounds.sw.lng, bounds.sw.lat), // eslint-disable-line no-undef
       new BMap.Point(bounds.ne.lng, bounds.sw.lat), // eslint-disable-line no-undef
@@ -84,7 +80,7 @@ class Rectangle extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

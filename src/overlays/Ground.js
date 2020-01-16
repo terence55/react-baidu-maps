@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Bounds } from '../utils/MapPropTypes';
-import { toBMapBounds } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Bounds} from '../utils/MapPropTypes';
+import {toBMapBounds} from '../utils/typeTransform';
 
 /**
  * GroundOverlay
@@ -43,25 +43,21 @@ const eventMap = [
 
 class Ground extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object
+    [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.ground;
   }
 
   componentDidMount() {
-    const { bounds } = this.props; // eslint-disable-line react/prop-types
+    const {bounds} = this.props; // eslint-disable-line react/prop-types
     this.ground = new BMap.GroundOverlay(toBMapBounds(bounds)); // eslint-disable-line no-undef
     this.props[MAP].addOverlay(this.ground);
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

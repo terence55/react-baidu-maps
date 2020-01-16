@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Size, Bounds } from '../utils/MapPropTypes';
-import { getControlAnchor, toBMapSize, toBMapBounds } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Size, Bounds} from '../utils/MapPropTypes';
+import {getControlAnchor, toBMapSize, toBMapBounds} from '../utils/typeTransform';
 
 /**
  * CopyrightControl
@@ -25,7 +25,7 @@ const controlledPropUpdater = {
       obj.getCopyrightCollection().splice(0, oldCopyrights.length);
     }
     if (arg && arg.length > 0) {
-      arg.forEach(item => obj.addCopyright({
+      arg.forEach((item) => obj.addCopyright({
         id: item.id,
         content: item.content,
         bounds: toBMapBounds(item.bounds)
@@ -43,21 +43,17 @@ const publicMethodMap = [
 
 class CopyrightControl extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size)
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.copyrightControl;
   }
 
   componentDidMount() {
-    const { anchor, offset } = this.props; // eslint-disable-line react/prop-types
+    const {anchor, offset} = this.props; // eslint-disable-line react/prop-types
     const option = {};
     if (anchor) {
       option.anchor = getControlAnchor(anchor);
@@ -70,7 +66,7 @@ class CopyrightControl extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }

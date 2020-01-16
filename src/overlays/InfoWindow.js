@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP, MARKER } from '../utils/constants';
-import { Point, Size } from '../utils/MapPropTypes';
-import { toBMapPoint, toBMapSize } from '../utils/typeTransform';
+import {MAP, MARKER} from '../utils/constants';
+import {Point, Size} from '../utils/MapPropTypes';
+import {toBMapPoint, toBMapSize} from '../utils/typeTransform';
 
 /**
  * InfoWindow
@@ -50,13 +50,13 @@ const eventMap = [
 
 class InfoWindow extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object,
-    [MARKER]: PropTypes.object,
-    position: PropTypes.shape(Point),
-    maxWidth: PropTypes.number,
-    offset: PropTypes.shape(Size),
-    enableMessage: PropTypes.bool,
-    message: PropTypes.string
+    [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+    [MARKER]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+    position: PropTypes.shape(Point), // eslint-disable-line react/no-unused-prop-types
+    maxWidth: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
+    offset: PropTypes.shape(Size), // eslint-disable-line react/no-unused-prop-types
+    enableMessage: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
+    message: PropTypes.string // eslint-disable-line react/no-unused-prop-types
   };
 
   constructor(props) {
@@ -83,7 +83,7 @@ class InfoWindow extends React.Component {
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }
@@ -94,7 +94,7 @@ class InfoWindow extends React.Component {
     if (this.infoWindow && this.infoWindow.isOpen()) {
       this.props[MAP].closeInfoWindow();
     }
-    const { position, content, maxWidth, offset, enableMessage, message } = props; // eslint-disable-line react/prop-types
+    const {position, content, maxWidth, offset, enableMessage, message} = props; // eslint-disable-line react/prop-types
     const options = {};
     if (maxWidth !== undefined) {
       options.maxWidth = maxWidth;

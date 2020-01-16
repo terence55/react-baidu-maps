@@ -1,13 +1,6 @@
 import React from 'react';
-import BaiduMap from '../../../src/BaiduMap';
-import asyncWrapper from '../../../src/async/asyncWrapper';
+import {BaiduMap, asyncWrapper, NavigationControl, ScaleControl, MapTypeControl, OverviewMapControl, CopyrightControl, GeolocationControl} from 'react-baidu-maps';
 import {MAP_KEY} from '../config';
-import NavigationControl from '../../../src/controls/NavigationControl';
-import ScaleControl from '../../../src/controls/ScaleControl';
-import MapTypeControl from '../../../src/controls/MapTypeControl';
-import OverviewMapControl from '../../../src/controls/OverviewMapControl';
-import CopyrightControl from '../../../src/controls/CopyrightControl';
-import GeolocationControl from '../../../src/controls/GeolocationControl';
 
 const AsyncMap = asyncWrapper(BaiduMap);
 
@@ -17,7 +10,6 @@ export default class ControlsDemo extends React.Component {
       <div>
         <div style={{background: '#444', height: '400px'}}>
           <AsyncMap
-            ref='map'
             mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
             loadingElement={<div style={{textAlign: 'center', fontSize: 40}}>Loading.....</div>}
             id='asyncmap'

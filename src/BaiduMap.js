@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from './utils/wrapClass';
-import { MAP } from './utils/constants';
-import { getMapType, toBMapBounds, toBMapPoint } from './utils/typeTransform';
-import { Point, Bounds } from './utils/MapPropTypes';
+import {MAP} from './utils/constants';
+import {getMapType, toBMapBounds, toBMapPoint} from './utils/typeTransform';
+import {Point, Bounds} from './utils/MapPropTypes';
 
 /**
  * BaiduMap Component
@@ -45,7 +45,7 @@ const controlledPropUpdater = {
   draggingCursor(obj, arg) { obj.setDraggingCursor(arg); },
   minZoom(obj, arg) { obj.setMinZoom(arg); },
   maxZoom(obj, arg) { obj.setMaxZoom(arg); },
-  mapStyle(obj, arg) { if (obj.setMapStyleV2) obj.setMapStyleV2({ styleJson: arg }); else obj.setMapStyle({ styleJson: arg }); },
+  mapStyle(obj, arg) { if (obj.setMapStyleV2) obj.setMapStyleV2({styleJson: arg}); else obj.setMapStyle({styleJson: arg}); },
   mapType(obj, arg) { obj.setMapType(getMapType(arg)); },
   highResolutionEnabled(obj, arg) { obj.highResolutionEnabled(arg); }
 };
@@ -156,18 +156,16 @@ class BaiduMap extends React.Component {
     return component.map;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (process.env.NODE_ENV !== 'production') {
       if (typeof BMap === 'undefined') { // eslint-disable-line no-undef
         console.error('BMap is not defined. Make sure you\'ve import script.');
+        return;
       }
     }
-  }
-
-  componentDidMount() {
-    const { defaultCenter, defaultZoom, onMapInstantiated, enableMapClick } = this.props;
-    this.map = new BMap.Map(this.id, { enableMapClick: enableMapClick }); // eslint-disable-line no-undef
-    const center = defaultCenter || { lng: 116.404, lat: 39.915 };
+    const {defaultCenter, defaultZoom, onMapInstantiated, enableMapClick} = this.props;
+    this.map = new BMap.Map(this.id, {enableMapClick}); // eslint-disable-line no-undef
+    const center = defaultCenter || {lng: 116.404, lat: 39.915};
     const zoom = defaultZoom || 11;
     this.map.centerAndZoom(toBMapPoint(center), zoom);
     if (onMapInstantiated) {
@@ -181,16 +179,16 @@ class BaiduMap extends React.Component {
   }
 
   render() {
-    const { mapContainer, children } = this.props; // eslint-disable-line react/prop-types
+    const {mapContainer, children} = this.props; // eslint-disable-line react/prop-types
     const map = this.map;
     if (!map || !children) {
-      return React.cloneElement(mapContainer, { id: this.id });
+      return React.cloneElement(mapContainer, {id: this.id});
     }
-    return React.cloneElement(mapContainer, { id: this.id }, this.renderChildren(children, map));
+    return React.cloneElement(mapContainer, {id: this.id}, this.renderChildren(children, map));
   }
 
   handleRestrictedBoundsUpdate() {
-    const { restrictedBounds } = this.props;
+    const {restrictedBounds} = this.props;
     if (restrictedBounds) {
       this.setRestrictedBounds();
     } else {
@@ -225,14 +223,14 @@ class BaiduMap extends React.Component {
     const curBoundsNE = curBounds.getNorthEast();
     const boundsSW = bounds.getSouthWest();
     const boundsNE = bounds.getNorthEast();
-    const boundary = { n: 0, e: 0, s: 0, w: 0 };
+    const boundary = {n: 0, e: 0, s: 0, w: 0};
     boundary.n = (curBoundsNE.lat < boundsNE.lat) ? curBoundsNE.lat : boundsNE.lat;
     boundary.e = (curBoundsNE.lng < boundsNE.lng) ? curBoundsNE.lng : boundsNE.lng;
     boundary.s = (curBoundsSW.lat < boundsSW.lat) ? boundsSW.lat : curBoundsSW.lat;
     boundary.w = (curBoundsSW.lng < boundsSW.lng) ? boundsSW.lng : curBoundsSW.lng;
     const center = new BMap.Point(boundary.w + ((boundary.e - boundary.w) / 2), boundary.s + ((boundary.n - boundary.s) / 2)); // eslint-disable-line no-undef
     setTimeout(() => {
-      map.panTo(center, { noAnimation: 'no' });
+      map.panTo(center, {noAnimation: 'no'});
     }, 1);
   }
 
@@ -241,10 +239,10 @@ class BaiduMap extends React.Component {
       const hasPropTypes = child.type.propTypes && child.type.propTypes[MAP] !== undefined;
       if (child.props.children) {
         return React.cloneElement(child,
-          hasPropTypes ? { [MAP]: map } : {},
+          hasPropTypes ? {[MAP]: map} : {},
           this.renderChildren(child.props.children, map));
       }
-      return React.cloneElement(child, hasPropTypes ? { [MAP]: map } : {});
+      return React.cloneElement(child, hasPropTypes ? {[MAP]: map} : {});
     });
   }
 

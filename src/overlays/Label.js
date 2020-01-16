@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
-import { MAP } from '../utils/constants';
-import { Point, Size } from '../utils/MapPropTypes';
-import { toBMapPoint, toBMapSize } from '../utils/typeTransform';
+import {MAP} from '../utils/constants';
+import {Point, Size} from '../utils/MapPropTypes';
+import {toBMapPoint, toBMapSize} from '../utils/typeTransform';
 
 /**
  * Label
@@ -52,25 +52,21 @@ const eventMap = [
 
 class Label extends React.Component {
   static propTypes = {
-    [MAP]: PropTypes.object
+    [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   getInstanceFromComponent(component) {
     return component.label;
   }
 
   componentDidMount() {
-    const { position } = this.props; // eslint-disable-line react/prop-types
+    const {position} = this.props; // eslint-disable-line react/prop-types
     this.label = new BMap.Label(toBMapPoint(position)); // eslint-disable-line no-undef
     this.props[MAP].addOverlay(this.label);
   }
 
   render() {
-    const { children } = this.props; // eslint-disable-line react/prop-types
+    const {children} = this.props; // eslint-disable-line react/prop-types
     if (children) {
       return <div>{children}</div>;
     }
