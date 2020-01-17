@@ -41,7 +41,7 @@ function wrapControlledPropTypes(WrappedComponent, controlledPropTypes, controll
         if (this.props[key] !== undefined) {
           const fn = controlledPropUpdater[key];
           if (fn) {
-            fn(getInstanceFromComponent(this), this.props[key], this);
+            fn(getInstanceFromComponent(this), this.props[key]);
           }
         }
       });
@@ -51,7 +51,7 @@ function wrapControlledPropTypes(WrappedComponent, controlledPropTypes, controll
         const nextValue = this.props[key];
         const fn = controlledPropUpdater[key];
         if (fn && nextValue !== prevProps[key]) {
-          fn(getInstanceFromComponent(this), nextValue, this);
+          fn(getInstanceFromComponent(this), nextValue);
         }
       });
       if (componentDidUpdate) {

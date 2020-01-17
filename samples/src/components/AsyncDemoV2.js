@@ -21,7 +21,7 @@ export default class AsyncDemo extends React.Component {
       <div>
         <div style={{height: '200px'}}>
           <AsyncMap
-            mapUrl={`http://api.map.baidu.com/api?v=3.0&ak=${MAP_KEY}`}
+            mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
             loadingElement={<div style={{textAlign: 'center', fontSize: 40}}>Loading.....</div>}
             id='asyncmap1'
             enableDragging

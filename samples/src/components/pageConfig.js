@@ -2,11 +2,12 @@ import React from 'react';
 import SimpleDemo from './SimpleDemo';
 import OverlayDemo from './OverlayDemo';
 import AsyncDemo from './AsyncDemo';
+import AsyncDemoV2 from './AsyncDemoV2';
 import RestrictedDemo from './RestrictedDemo';
-import CustomStyleDemoV2 from './CustomStyleDemoV2';
 import ControlsDemo from './ControlsDemo';
 import InfoWindowDemo from './InfoWindowDemo';
 import CustomStyleDemo from './CustomStyleDemo';
+import CustomStyleDemoV2 from './CustomStyleDemoV2';
 
 const config = [
   {
@@ -30,9 +31,9 @@ const config = [
     comp: <RestrictedDemo />
   },
   {
-    type: 'customstylev2',
-    link: '/component/customstylev2',
-    comp: <CustomStyleDemoV2 />
+    type: 'customstyle',
+    link: '/component/customstyle',
+    comp: <CustomStyleDemo />
   },
   {
     type: 'controls',
@@ -45,9 +46,14 @@ const config = [
     comp: <InfoWindowDemo />
   },
   {
-    type: 'customstylev3',
-    link: '/component/customstylev3',
-    comp: <CustomStyleDemo />
+    type: 'asyncv2',
+    link: '/component/asyncv2',
+    comp: <AsyncDemoV2 />
+  },
+  {
+    type: 'customstylev2',
+    link: '/component/customstylev2',
+    comp: <CustomStyleDemoV2 />
   }
 ];
 
