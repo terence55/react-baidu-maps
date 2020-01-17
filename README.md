@@ -47,7 +47,7 @@ const AsyncMap = asyncWrapper(BaiduMap);
 ReactDOM.render(
   <div style={{ background: '#444', height: '500px' }}>
     <AsyncMap
-      mapUrl={`http://api.map.baidu.com/api?v=2.0&ak=${MAP_KEY}`}
+      mapUrl={`http://api.map.baidu.com/api?v=3.0&ak=${MAP_KEY}`}
       loadingElement={<div>Loading.....</div>}
       mapContainer={<div style={{ height: '100%' }} />} />
   </div>, container);
