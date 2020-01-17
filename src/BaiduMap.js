@@ -157,11 +157,9 @@ class BaiduMap extends React.Component {
   }
 
   componentDidMount() {
-    if (process.env.NODE_ENV !== 'production') {
-      if (typeof BMap === 'undefined') { // eslint-disable-line no-undef
-        console.error('BMap is not defined. Make sure you\'ve import script.');
-        return;
-      }
+    if (typeof BMap === 'undefined') { // eslint-disable-line no-undef
+      console.error('BMap is not defined. Make sure you\'ve import script.');
+      return;
     }
     const {defaultCenter, defaultZoom, onMapInstantiated, enableMapClick} = this.props;
     this.map = new BMap.Map(this.id, {enableMapClick}); // eslint-disable-line no-undef

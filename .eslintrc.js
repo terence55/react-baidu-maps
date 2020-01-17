@@ -49,7 +49,8 @@ module.exports = {
     'semi': ['error', 'always'], // require or disallow semicolons instead of ASI
     'class-methods-use-this': 'off', // Enforce that class methods utilize this
     'global-require': 'off', // Enforce require() on the top-level module scope
-    'strict': 'off', // require or disallow strict mode directives
+    'strict': 'off', // require or disallow strict mode directives,
+    'no-return-assign': 'off',
 
     // import
     'import/no-unresolved': 'off', // Ensure imports point to a file/module that can be resolved
