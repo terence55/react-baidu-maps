@@ -99,9 +99,8 @@ export default function asyncWrapper(WrappedComponent, extraProps) {
     }
 
     isBMapAvailable() {
-      const {isBMapAvailable} = extraProps;
-      if (isBMapAvailable !== undefined) {
-        return isBMapAvailable();
+      if (extraProps && extraProps.isBMapAvailable !== undefined) {
+        return extraProps.isBMapAvailable();
       }
       if (typeof BMap === 'undefined') { // eslint-disable-line no-undef
         return false;
