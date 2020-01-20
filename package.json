@@ -1,6 +1,6 @@
 {
   "name": "react-baidu-maps",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "React Components for Baidu Maps",
   "scripts": {
     "start": "webpack-dev-server",
