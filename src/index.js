@@ -26,6 +26,8 @@ export {default as Rectangle} from './overlays/Rectangle';
 
 export {default as InfoWindow} from './overlays/InfoWindow';
 
+export {default as CanvasLayer} from './overlays/CanvasLayer';
+
 // Controls
 
 export {default as CopyrightControl} from './controls/CopyrightControl';

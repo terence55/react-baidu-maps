@@ -8,6 +8,7 @@ import ControlsDemo from './ControlsDemo';
 import InfoWindowDemo from './InfoWindowDemo';
 import CustomStyleDemo from './CustomStyleDemo';
 import CustomStyleDemoV2 from './CustomStyleDemoV2';
+import CanvasLayerDemo from './CanvasLayerDemo';
 
 const config = [
   {
@@ -54,6 +55,11 @@ const config = [
     type: 'customstylev2',
     link: '/component/customstylev2',
     comp: <CustomStyleDemoV2 />
+  },
+  {
+    type: 'canvaslayer',
+    link: '/component/canvaslayer',
+    comp: <CanvasLayerDemo />
   }
 ];
 
