@@ -9,6 +9,7 @@ import InfoWindowDemo from './InfoWindowDemo';
 import CustomStyleDemo from './CustomStyleDemo';
 import CustomStyleDemoV2 from './CustomStyleDemoV2';
 import CanvasLayerDemo from './CanvasLayerDemo';
+import CurveDemo from './CurveDemo';
 
 const config = [
   {
@@ -60,6 +61,11 @@ const config = [
     type: 'canvaslayer',
     link: '/component/canvaslayer',
     comp: <CanvasLayerDemo />
+  },
+  {
+    type: 'curve',
+    link: '/component/curve',
+    comp: <CurveDemo />
   }
 ];
 

@@ -21,7 +21,7 @@ export default class ControlsDemo extends React.Component {
             <NavigationControl />
             <ScaleControl />
             <MapTypeControl />
-            <OverviewMapControl />
+            <OverviewMapControl isOpen />
             <GeolocationControl
               onLocationSuccess={(e) => {
                 let address = '';
