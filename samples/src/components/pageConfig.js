@@ -10,6 +10,8 @@ import CustomStyleDemo from './CustomStyleDemo';
 import CustomStyleDemoV2 from './CustomStyleDemoV2';
 import CanvasLayerDemo from './CanvasLayerDemo';
 import CurveDemo from './CurveDemo';
+import SubwayDemo from './SubwayDemo';
+import SubwayAdvancedDemo from './SubwayAdvancedDemo';
 
 const config = [
   {
@@ -66,6 +68,16 @@ const config = [
     type: 'curve',
     link: '/component/curve',
     comp: <CurveDemo />
+  },
+  {
+    type: 'subway',
+    link: '/component/subway',
+    comp: <SubwayDemo />
+  },
+  {
+    type: 'subwayadvanced',
+    link: '/component/subwayadvanced',
+    comp: <SubwayAdvancedDemo />
   }
 ];
 

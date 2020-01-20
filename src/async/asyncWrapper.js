@@ -7,7 +7,7 @@ import getDisplayName from '../utils/getDisplayName';
  * @author terencewu
  */
 
-export default function asyncWrapper(WrappedComponent) {
+export default function asyncWrapper(WrappedComponent, extraProps) {
   return class Container extends Component {
     static displayName = `asyncWrapper(${getDisplayName(WrappedComponent)})`;
 
@@ -15,7 +15,8 @@ export default function asyncWrapper(WrappedComponent) {
       useScriptjs: PropTypes.bool,
       mapUrl: PropTypes.string.isRequired,
       loadingElement: PropTypes.element.isRequired,
-      onMapSrcLoaded: PropTypes.func
+      onMapSrcLoaded: PropTypes.func,
+      isBMapAvailable: PropTypes.func
     };
 
     static defaultProps = {
@@ -98,6 +99,10 @@ export default function asyncWrapper(WrappedComponent) {
     }
 
     isBMapAvailable() {
+      const {isBMapAvailable} = extraProps;
+      if (isBMapAvailable !== undefined) {
+        return isBMapAvailable();
+      }
       if (typeof BMap === 'undefined') { // eslint-disable-line no-undef
         return false;
       }

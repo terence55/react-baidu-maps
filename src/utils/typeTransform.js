@@ -129,3 +129,24 @@ export function toBMapLabel(arg) {
   }
   return label;
 }
+
+export function toBMapSubwaySize(arg) {
+  return new BMapSub.Size(arg.width, arg.height); // eslint-disable-line no-undef
+}
+
+export function toBMapSubwayIcon(arg) {
+  return new BMapSub.Icon(arg.url, toBMapSubwaySize(arg.size)); // eslint-disable-line no-undef
+}
+
+export function getSubwayControlAnchor(anchor) {
+  const MAP = {
+    top_left: BMAPSUB_ANCHOR_TOP_LEFT, // eslint-disable-line no-undef
+    top_right: BMAPSUB_ANCHOR_TOP_RIGHT, // eslint-disable-line no-undef
+    bottom_left: BMAPSUB_ANCHOR_BOTTOM_LEFT, // eslint-disable-line no-undef
+    bottom_right: BMAPSUB_ANCHOR_BOTTOM_RIGHT // eslint-disable-line no-undef
+  };
+  if (MAP[anchor]) {
+    return MAP[anchor];
+  }
+  return undefined;
+}

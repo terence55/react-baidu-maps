@@ -39,4 +39,14 @@ const Label = {
   zIndex: PropTypes.number
 };
 
-export {Point, Size, Bounds, Icon, Label};
+const SubwaySize = {
+  width: PropTypes.number,
+  height: PropTypes.number
+};
+
+const SubwayIcon = {
+  url: PropTypes.string,
+  size: PropTypes.shape(SubwaySize)
+};
+
+export {Point, Size, Bounds, Icon, Label, SubwaySize, SubwayIcon};
