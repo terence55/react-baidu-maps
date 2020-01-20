@@ -308,3 +308,38 @@ All Baidu Maps controls are supported.
       }
     }]} />
 ```
+
+### Subway
+
+```js
+<AsyncMap
+  mapUrl={`http://api.map.baidu.com/api?type=subway&v=1.0&ak=${MAP_KEY}`}
+  loadingElement={<div style={{textAlign: 'center', fontSize: 40}}>Loading.....</div>}
+  id='asyncmap1'
+  mapContainer={<div style={{height: '100%'}} />}
+  city='289'
+/>
+```
+
+### Subway Maker
+
+```js
+<SubwayMarker
+  station='西直门'
+  icon={{
+    url: 'https://api.map.baidu.com/images/subway/start-bak.png',
+    size: {
+      width: 50,
+      height: 80
+    }
+  }}
+/>
+```
+
+### Subway Zoom Control
+
+```js
+<SubwayZoomControl
+  anchor='top_right'
+/>
+```
