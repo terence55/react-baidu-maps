@@ -12,6 +12,7 @@ import CanvasLayerDemo from './CanvasLayerDemo';
 import CurveDemo from './CurveDemo';
 import SubwayDemo from './SubwayDemo';
 import SubwayAdvancedDemo from './SubwayAdvancedDemo';
+import MarkerClustererDemo from './MarkerClustererDemo';
 
 const config = [
   {
@@ -78,6 +79,11 @@ const config = [
     type: 'subwayadvanced',
     link: '/component/subwayadvanced',
     comp: <SubwayAdvancedDemo />
+  },
+  {
+    type: 'markerclusterer',
+    link: '/component/markerclusterer',
+    comp: <MarkerClustererDemo />
   }
 ];
 
