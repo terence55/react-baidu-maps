@@ -234,6 +234,9 @@ class BaiduMap extends React.Component {
 
   renderChildren(children, map) {
     return React.Children.map(children, (child) => {
+      if (!child) {
+        return null;
+      }
       const hasPropTypes = child.type.propTypes && child.type.propTypes[MAP] !== undefined;
       if (child.props.children) {
         return React.cloneElement(child,

@@ -56,12 +56,14 @@ class InfoWindow extends React.Component {
     maxWidth: PropTypes.number, // eslint-disable-line react/no-unused-prop-types
     offset: PropTypes.shape(Size), // eslint-disable-line react/no-unused-prop-types
     enableMessage: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
-    message: PropTypes.string // eslint-disable-line react/no-unused-prop-types
+    message: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+    trigger: PropTypes.oneOf(['hover', 'click']) // eslint-disable-line react/no-unused-prop-types
   };
 
   constructor(props) {
     super(props);
     this.openWindow = this.openWindow.bind(this);
+    this.closeWindow = this.closeWindow.bind(this);
   }
 
   getInstanceFromComponent(component) {
@@ -78,7 +80,13 @@ class InfoWindow extends React.Component {
 
   componentWillUnmount() {
     if (this.props[MARKER]) {
-      this.props[MARKER].removeEventListener('click', this.openWindow);
+      const {trigger} = this.props;
+      if (trigger === 'hover') {
+        this.props[MARKER].removeEventListener('mouseover', this.openWindow);
+        this.props[MARKER].removeEventListener('mouseout', this.closeWindow);
+      } else {
+        this.props[MARKER].removeEventListener('click', this.openWindow);
+      }
     }
   }
 
@@ -91,10 +99,8 @@ class InfoWindow extends React.Component {
   }
 
   configWindow(props) {
-    if (this.infoWindow && this.infoWindow.isOpen()) {
-      this.props[MAP].closeInfoWindow();
-    }
-    const {position, content, maxWidth, offset, enableMessage, message} = props; // eslint-disable-line react/prop-types
+    this.closeWindow();
+    const {position, content, maxWidth, offset, enableMessage, message, trigger} = props; // eslint-disable-line react/prop-types
     const options = {};
     if (maxWidth !== undefined) {
       options.maxWidth = maxWidth;
@@ -110,7 +116,12 @@ class InfoWindow extends React.Component {
     }
     this.infoWindow = new BMap.InfoWindow(content, options); // eslint-disable-line no-undef
     if (this.props[MARKER]) {
-      this.props[MARKER].addEventListener('click', this.openWindow);
+      if (trigger === 'hover') {
+        this.props[MARKER].addEventListener('mouseover', this.openWindow);
+        this.props[MARKER].addEventListener('mouseout', this.closeWindow);
+      } else {
+        this.props[MARKER].addEventListener('click', this.openWindow);
+      }
     } else if (position !== undefined) {
       this.props[MAP].openInfoWindow(this.infoWindow, toBMapPoint(position));
     }
@@ -118,6 +129,12 @@ class InfoWindow extends React.Component {
 
   openWindow() {
     this.props[MAP].openInfoWindow(this.infoWindow, toBMapPoint(this.props[MARKER].getPosition()));
+  }
+
+  closeWindow() {
+    if (this.infoWindow && this.infoWindow.isOpen()) {
+      this.props[MAP].closeInfoWindow();
+    }
   }
 }
 

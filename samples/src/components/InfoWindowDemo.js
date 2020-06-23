@@ -32,6 +32,9 @@ export default class AsyncDemo extends React.Component {
             <Marker position={{lng: 116.904, lat: 39.915}} onClick={() => console.warn('click marker')}>
               <InfoWindow content="<div style='color: red;'>I am red</div>" offset={{width: 0, height: -20}} />
             </Marker>
+            <Marker position={{lng: 116.904, lat: 39.975}}>
+              <InfoWindow content='hover window' offset={{width: 0, height: -20}} trigger='hover' />
+            </Marker>
           </AsyncMap>
         </div>
       </div>
