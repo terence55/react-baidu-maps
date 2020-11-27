@@ -15,9 +15,9 @@ const controlledPropTypes = {
 };
 
 const controlledPropUpdater = {
-  zIndex(obj, arg) { obj.options.zIndex = arg; obj.zIndex = arg; },
-  paneName(obj, arg) { obj.options.paneName = arg; },
-  update(obj, arg) { obj.options.update = function() { arg(this.canvas); }; // eslint-disable-line brace-style
+  zIndex(obj, arg) { if (!obj || !obj.options) return; obj.options.zIndex = arg; obj.zIndex = arg; },
+  paneName(obj, arg) { if (!obj || !obj.options) return; obj.options.paneName = arg; },
+  update(obj, arg) { if (!obj || !obj.options) return; obj.options.update = function() { arg(this.canvas); }; // eslint-disable-line brace-style
   }
 };
 
@@ -33,10 +33,16 @@ class CanvasLayer extends React.Component {
   };
 
   getInstanceFromComponent(component) {
+    if (BMap.CanvasLayer === undefined) {
+      return;
+    }
     return component.canvasLayer;
   }
 
   componentDidMount() {
+    if (BMap.CanvasLayer === undefined) {
+      return;
+    }
     const {zIndex, paneName, update} = this.props; // eslint-disable-line react/prop-types
     const options = {};
     if (zIndex !== undefined) {
