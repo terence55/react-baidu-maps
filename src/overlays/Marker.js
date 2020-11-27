@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP, MARKER_CLUSTERER, MARKER} from '../utils/constants';
 import {Point, Size, Icon, Label} from '../utils/MapPropTypes';
 import {getMarkerAnimation, toBMapPoint, toBMapSize, toBMapIcon, toBMapLabel} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Marker
@@ -74,30 +75,26 @@ const eventMap = [
   'rightclick'
 ];
 
-class Marker extends React.Component {
+class Marker extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     [MARKER_CLUSTERER]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.marker;
-  }
-
   componentDidMount() {
     const {position} = this.props; // eslint-disable-line react/prop-types
-    this.marker = new BMap.Marker(toBMapPoint(position)); // eslint-disable-line no-undef
+    this.instance = new BMap.Marker(toBMapPoint(position)); // eslint-disable-line no-undef
     if (this.props[MARKER_CLUSTERER]) {
-      this.props[MARKER_CLUSTERER].addMarker(this.marker);
+      this.props[MARKER_CLUSTERER].addMarker(this.instance);
     } else {
-      this.props[MAP].addOverlay(this.marker);
+      this.props[MAP].addOverlay(this.instance);
     }
     this.forceUpdate();
   }
 
   render() {
     const {children} = this.props; // eslint-disable-line react/prop-types
-    const marker = this.marker;
+    const marker = this.instance;
     if (children) {
       return (
         <div>

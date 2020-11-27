@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Point} from '../utils/MapPropTypes';
 import {toBMapPoint} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Polyline
@@ -58,27 +59,15 @@ const eventMap = [
   'lineupdate'
 ];
 
-class Polyline extends React.Component {
+class Polyline extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.polyline;
-  }
-
   componentDidMount() {
     const {path} = this.props; // eslint-disable-line react/prop-types
-    this.polyline = new BMap.Polyline(path.map((point) => toBMapPoint(point))); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.polyline);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.Polyline(path.map((point) => toBMapPoint(point))); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 

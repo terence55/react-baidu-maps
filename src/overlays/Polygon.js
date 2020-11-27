@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Point} from '../utils/MapPropTypes';
 import {toBMapPoint} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Polygon
@@ -60,27 +61,15 @@ const eventMap = [
   'lineupdate'
 ];
 
-class Polygon extends React.Component {
+class Polygon extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.polygon;
-  }
-
   componentDidMount() {
     const {path} = this.props; // eslint-disable-line react/prop-types
-    this.polygon = new BMap.Polygon(path.map((point) => toBMapPoint(point))); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.polygon);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.Polygon(path.map((point) => toBMapPoint(point))); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 

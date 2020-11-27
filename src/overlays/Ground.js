@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Bounds} from '../utils/MapPropTypes';
 import {toBMapBounds} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * GroundOverlay
@@ -41,27 +42,15 @@ const eventMap = [
   'dblclick'
 ];
 
-class Ground extends React.Component {
+class Ground extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.ground;
-  }
-
   componentDidMount() {
     const {bounds} = this.props; // eslint-disable-line react/prop-types
-    this.ground = new BMap.GroundOverlay(toBMapBounds(bounds)); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.ground);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.GroundOverlay(toBMapBounds(bounds)); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 

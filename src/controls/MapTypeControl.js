@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import {MAP} from '../utils/constants';
 import {Size} from '../utils/MapPropTypes';
 import {getMapTypeControlType, getMapType, getControlAnchor, toBMapSize} from '../utils/typeTransform';
+import BaseControl from './BaseControl';
 
 /**
  * MapTypeControl
  * @author terencewu
  */
 
-class MapTypeControl extends React.Component {
+class MapTypeControl extends BaseControl {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     type: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
@@ -17,10 +18,6 @@ class MapTypeControl extends React.Component {
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size)
   };
-
-  getInstanceFromComponent(component) {
-    return component.mapTypeControl;
-  }
 
   componentDidMount() {
     const {type, mapTypes, anchor, offset} = this.props; // eslint-disable-line react/prop-types
@@ -37,16 +34,8 @@ class MapTypeControl extends React.Component {
     if (offset) {
       option.offset = toBMapSize(offset);
     }
-    this.mapTypeControl = new BMap.MapTypeControl(option); // eslint-disable-line no-undef
-    this.props[MAP].addControl(this.mapTypeControl);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.MapTypeControl(option); // eslint-disable-line no-undef
+    this.props[MAP].addControl(this.instance);
   }
 }
 

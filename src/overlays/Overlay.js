@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Overlay
@@ -15,7 +16,7 @@ const publicMethodMap = [
   'hide'
 ];
 
-class Overlay extends React.Component {
+class Overlay extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     customConstructor: PropTypes.func,
@@ -24,23 +25,11 @@ class Overlay extends React.Component {
     draw: PropTypes.func
   };
 
-  getInstanceFromComponent(component) {
-    return component.label;
-  }
-
   componentDidMount() {
     const {customConstructor, constructorParams, initialize, draw} = this.props;
     const CustomOverlayClass = this.getOverlayClass(customConstructor, initialize, draw);
-    this.overlay = new CustomOverlayClass(constructorParams); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.overlay);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new CustomOverlayClass(constructorParams); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 
   getOverlayClass(customConstructor, initialize, draw) {

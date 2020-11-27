@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Point} from '../utils/MapPropTypes';
 import {toBMapPoint} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Circle
@@ -62,19 +63,15 @@ const eventMap = [
   'lineupdate'
 ];
 
-class Circle extends React.Component {
+class Circle extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.circle;
-  }
-
   componentDidMount() {
     const {center} = this.props; // eslint-disable-line react/prop-types
-    this.circle = new BMap.Circle(toBMapPoint(center)); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.circle);
+    this.instance = new BMap.Circle(toBMapPoint(center)); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 
   render() {

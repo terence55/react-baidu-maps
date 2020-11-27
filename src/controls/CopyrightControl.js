@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Size, Bounds} from '../utils/MapPropTypes';
 import {getControlAnchor, toBMapSize, toBMapBounds} from '../utils/typeTransform';
+import BaseControl from './BaseControl';
 
 /**
  * CopyrightControl
@@ -41,16 +42,12 @@ const publicMethodMap = [
   'getCopyrightCollection'
 ];
 
-class CopyrightControl extends React.Component {
+class CopyrightControl extends BaseControl {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size)
   };
-
-  getInstanceFromComponent(component) {
-    return component.copyrightControl;
-  }
 
   componentDidMount() {
     const {anchor, offset} = this.props; // eslint-disable-line react/prop-types
@@ -61,16 +58,8 @@ class CopyrightControl extends React.Component {
     if (offset) {
       option.offset = toBMapSize(offset);
     }
-    this.copyrightControl = new BMap.CopyrightControl(option); // eslint-disable-line no-undef
-    this.props[MAP].addControl(this.copyrightControl);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.CopyrightControl(option); // eslint-disable-line no-undef
+    this.props[MAP].addControl(this.instance);
   }
 }
 

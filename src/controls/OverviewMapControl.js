@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Size} from '../utils/MapPropTypes';
 import {getControlAnchor, toBMapSize} from '../utils/typeTransform';
+import BaseControl from './BaseControl';
 
 /**
  * OverviewMapControl
@@ -28,17 +29,13 @@ const eventMap = [
   'viewchanging'
 ];
 
-class OverviewMapControl extends React.Component {
+class OverviewMapControl extends BaseControl {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
     offset: PropTypes.shape(Size),
     isOpen: PropTypes.bool
   };
-
-  getInstanceFromComponent(component) {
-    return component.overviewMapControl;
-  }
 
   componentDidMount() {
     const {size, anchor, offset, isOpen} = this.props; // eslint-disable-line react/prop-types
@@ -55,16 +52,8 @@ class OverviewMapControl extends React.Component {
     if (isOpen !== undefined) {
       option.isOpen = isOpen;
     }
-    this.overviewMapControl = new BMap.OverviewMapControl(option); // eslint-disable-line no-undef
-    this.props[MAP].addControl(this.overviewMapControl);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.OverviewMapControl(option); // eslint-disable-line no-undef
+    this.props[MAP].addControl(this.instance);
   }
 }
 

@@ -37,9 +37,16 @@ class SubwayMarker extends React.Component {
 
   componentDidMount() {
     const {station, icon} = this.props; // eslint-disable-line react/prop-types
-    this.marker = new BMapSub.Marker(station, {icon: toBMapSubwayIcon(icon)}); // eslint-disable-line no-undef
-    this.props[MAP].addMarker(this.marker);
+    this.instance = new BMapSub.Marker(station, {icon: toBMapSubwayIcon(icon)}); // eslint-disable-line no-undef
+    this.props[MAP].addMarker(this.instance);
     this.forceUpdate();
+  }
+
+  componentWillUnmount() {
+    if (this.instance) {
+      this.props[MAP].removeMarker(this.instance);
+      this.instance = null;
+    }
   }
 
   render() {

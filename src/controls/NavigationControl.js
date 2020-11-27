@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Size} from '../utils/MapPropTypes';
 import {getNavigationControlType, getControlAnchor, toBMapSize} from '../utils/typeTransform';
+import BaseControl from './BaseControl';
 
 /**
  * NavigationControl
@@ -22,7 +23,7 @@ const publicMethodMap = [
   'getType'
 ];
 
-class NavigationControl extends React.Component {
+class NavigationControl extends BaseControl {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
@@ -30,10 +31,6 @@ class NavigationControl extends React.Component {
     showZoomInfo: PropTypes.bool,
     enableGeolocation: PropTypes.bool
   };
-
-  getInstanceFromComponent(component) {
-    return component.navigationControl;
-  }
 
   componentDidMount() {
     const {type, anchor, offset, showZoomInfo, enableGeolocation} = this.props; // eslint-disable-line react/prop-types
@@ -53,16 +50,8 @@ class NavigationControl extends React.Component {
     if (enableGeolocation !== undefined) {
       option.enableGeolocation = enableGeolocation;
     }
-    this.navigationControl = new BMap.NavigationControl(option); // eslint-disable-line no-undef
-    this.props[MAP].addControl(this.navigationControl);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.NavigationControl(option); // eslint-disable-line no-undef
+    this.props[MAP].addControl(this.instance);
   }
 }
 

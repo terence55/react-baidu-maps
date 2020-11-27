@@ -5,6 +5,7 @@ import {MAP} from '../utils/constants';
 import CurveLine from '../addons/CurveLine';
 import {Point} from '../utils/MapPropTypes';
 import {toBMapPoint} from '../utils/typeTransform';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Curve
@@ -59,27 +60,15 @@ const eventMap = [
   'lineupdate'
 ];
 
-class Curve extends React.Component {
+class Curve extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    return component.curve;
-  }
-
   componentDidMount() {
     const {path} = this.props; // eslint-disable-line react/prop-types
-    this.curve = new CurveLine(path.map((point) => toBMapPoint(point)));
-    this.props[MAP].addOverlay(this.curve);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new CurveLine(path.map((point) => toBMapPoint(point)));
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 

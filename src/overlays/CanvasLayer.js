@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * CanvasLayer
@@ -27,20 +28,13 @@ const publicMethodMap = [
 const eventMap = [
 ];
 
-class CanvasLayer extends React.Component {
+class CanvasLayer extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object // eslint-disable-line react/no-unused-prop-types
   };
 
-  getInstanceFromComponent(component) {
-    if (BMap.CanvasLayer === undefined) {
-      return;
-    }
-    return component.canvasLayer;
-  }
-
   componentDidMount() {
-    if (BMap.CanvasLayer === undefined) {
+    if (BMap.CanvasLayer === undefined) { // eslint-disable-line no-undef
       return;
     }
     const {zIndex, paneName, update} = this.props; // eslint-disable-line react/prop-types
@@ -54,16 +48,8 @@ class CanvasLayer extends React.Component {
     if (update !== undefined) {
       options.update = function() { update(this.canvas); };
     }
-    this.canvasLayer = new BMap.CanvasLayer(options); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.canvasLayer);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.CanvasLayer(options); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 

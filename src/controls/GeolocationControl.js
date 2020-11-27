@@ -4,6 +4,7 @@ import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Size, Icon} from '../utils/MapPropTypes';
 import {getControlAnchor, toBMapSize, toBMapIcon} from '../utils/typeTransform';
+import BaseControl from './BaseControl';
 
 /**
  * GeolocationControl
@@ -20,7 +21,7 @@ const eventMap = [
   'locationError'
 ];
 
-class GeolocationControl extends React.Component {
+class GeolocationControl extends BaseControl {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     anchor: PropTypes.oneOf(['top_left', 'top_right', 'bottom_left', 'bottom_right']),
@@ -29,10 +30,6 @@ class GeolocationControl extends React.Component {
     enableAutoLocation: PropTypes.bool,
     locationIcon: PropTypes.shape(Icon)
   };
-
-  getInstanceFromComponent(component) {
-    return component.geolocationControl;
-  }
 
   componentDidMount() {
     const {anchor, offset, showAddressBar, enableAutoLocation, locationIcon} = this.props; // eslint-disable-line react/prop-types
@@ -52,16 +49,8 @@ class GeolocationControl extends React.Component {
     if (locationIcon) {
       option.locationIcon = toBMapIcon(locationIcon);
     }
-    this.geolocationControl = new BMap.GeolocationControl(option); // eslint-disable-line no-undef
-    this.props[MAP].addControl(this.geolocationControl);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.GeolocationControl(option); // eslint-disable-line no-undef
+    this.props[MAP].addControl(this.instance);
   }
 }
 

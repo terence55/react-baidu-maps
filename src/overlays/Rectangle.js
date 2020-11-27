@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import wrapClass from '../utils/wrapClass';
 import {MAP} from '../utils/constants';
 import {Bounds} from '../utils/MapPropTypes';
+import BaseOverlay from './BaseOverlay';
 
 /**
  * Rectangle
@@ -57,15 +58,11 @@ const eventMap = [
   'lineupdate'
 ];
 
-class Rectangle extends React.Component {
+class Rectangle extends BaseOverlay {
   static propTypes = {
     [MAP]: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
     bounds: PropTypes.shape(Bounds)
   };
-
-  getInstanceFromComponent(component) {
-    return component.rectangle;
-  }
 
   componentDidMount() {
     const {bounds} = this.props;
@@ -75,16 +72,8 @@ class Rectangle extends React.Component {
       new BMap.Point(bounds.ne.lng, bounds.ne.lat), // eslint-disable-line no-undef
       new BMap.Point(bounds.sw.lng, bounds.ne.lat) // eslint-disable-line no-undef
     ];
-    this.rectangle = new BMap.Polygon(points); // eslint-disable-line no-undef
-    this.props[MAP].addOverlay(this.rectangle);
-  }
-
-  render() {
-    const {children} = this.props; // eslint-disable-line react/prop-types
-    if (children) {
-      return <div>{children}</div>;
-    }
-    return false;
+    this.instance = new BMap.Polygon(points); // eslint-disable-line no-undef
+    this.props[MAP].addOverlay(this.instance);
   }
 }
 
